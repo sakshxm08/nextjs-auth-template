@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Authentication Template
+
+A comprehensive Next.js starter template with authentication, state management, and modern styling. This template helps you quickly build secure and scalable web applications with best practices in place.
+
+## Features
+
+- 🔐 **Authentication with AuthJS (NextAuth.js)**
+  - Credentials-based login (Email & Password)
+  - Social authentication (Google, GitHub OAuth)
+- 🔄 **State Management using Redux**
+- 🗄️ **MongoDB Database Integration**
+- 📧 **Email Service using Resend**
+- 💅 **Styling with TailwindCSS and Shadcn UI**
+- 🌓 **Dark/Light Mode Support**
+- ⚡ **Type-safe with TypeScript**
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```sh
+git clone https://github.com/sakshxm08/nextjs-auth-template.git
+cd nextjs-auth-template
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Environment Setup
 
-## Learn More
+Create a `.env.local` file in the root directory and add the following variables:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+MONGODB_URI=
+RESEND_API_KEY=
+NEXT_PUBLIC_APP_URL=
+AUTH_SECRET=
+AUTH_GITHUB_ID=
+AUTH_GITHUB_SECRET=
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Run the Development Server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```sh
+npm run dev
+```
 
-## Deploy on Vercel
+Then, open `http://localhost:3000` in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Authentication Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Email/Password Authentication
+
+- Implements custom email/password authentication using AuthJS.
+- Supports email verification and password reset.
+
+### OAuth Authentication
+
+- **GitHub**: Callback URL - `{NEXT_PUBLIC_APP_URL}/api/auth/callback/github`
+- **Google**: Redirect URI - `{NEXT_PUBLIC_APP_URL}/api/auth/callback/google`
+
+## Usage Examples
+
+### Authentication Hook Usage
+
+```tsx
+import { signIn } from "next-auth/react";
+
+const LoginPage = () => {
+  const handleSignin = (provider) => signIn(provider);
+};
+```
+
+### Redux State Usage
+
+```tsx
+import { useSelector } from "react-redux";
+
+const UserProfile = () => {
+  const user = useSelector((state) => state.user.user);
+};
+```
+
+## Deployment
+
+This project is ready for deployment on **Vercel**, **AWS**, or any hosting service that supports Next.js.
+
+```sh
+npm run build
+npm start
+```
+
+## Contributing
+
+Feel free to submit issues or pull requests to improve this template.
+
+## License
+
+MIT License
